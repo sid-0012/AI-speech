@@ -1,0 +1,26 @@
+POST http://localhost:18000/nls/web/member/register
+Content-Type: application/json
+
+{
+  "mobile": "12345678905",
+  "password": "123",
+  "code": "343254"
+}
+
+###
+
+POST http://localhost:18000/nls/web/member/login
+Content-Type: application/json
+
+{
+  "mobile": "13000000002",
+  "password": "876cc0b1232012c688aaeac03420d23c",
+  "imageCode": "67m7",
+  "imageCodeToken": "1234"
+}
+
+> {%
+  client.log(JSON.stringify(response.body));
+  client.log(JSON.stringify(response.body.content.token));
+  client.global.set("token", response.body.content.token);
+%}

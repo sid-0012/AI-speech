@@ -1,0 +1,6 @@
+GET http://localhost:18000/nls/web/order-info/query-order-status/20240311105511608925
+Accept: application/json
+token: {{token}}
+
+###
+

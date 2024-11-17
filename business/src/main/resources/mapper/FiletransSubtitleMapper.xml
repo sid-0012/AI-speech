@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiawa.nls.business.mapper.FiletransSubtitleMapper">
+  <resultMap id="BaseResultMap" type="com.jiawa.nls.business.domain.FiletransSubtitle">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="filetrans_id" jdbcType="BIGINT" property="filetransId" />
+    <result column="index" jdbcType="INTEGER" property="index" />
+    <result column="begin" jdbcType="INTEGER" property="begin" />
+    <result column="end" jdbcType="INTEGER" property="end" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, filetrans_id, `index`, `begin`, `end`, `text`, created_at, updated_at
+  </sql>
+  <select id="selectByExample" parameterType="com.jiawa.nls.business.domain.FiletransSubtitleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from filetrans_subtitle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filetrans_subtitle
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from filetrans_subtitle
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jiawa.nls.business.domain.FiletransSubtitleExample">
+    delete from filetrans_subtitle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jiawa.nls.business.domain.FiletransSubtitle">
+    insert into filetrans_subtitle (id, filetrans_id, `index`, 
+      `begin`, `end`, `text`, created_at, 
+      updated_at)
+    values (#{id,jdbcType=BIGINT}, #{filetransId,jdbcType=BIGINT}, #{index,jdbcType=INTEGER}, 
+      #{begin,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawa.nls.business.domain.FiletransSubtitle">
+    insert into filetrans_subtitle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="filetransId != null">
+        filetrans_id,
+      </if>
+      <if test="index != null">
+        `index`,
+      </if>
+      <if test="begin != null">
+        `begin`,
+      </if>
+      <if test="end != null">
+        `end`,
+      </if>
+      <if test="text != null">
+        `text`,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="filetransId != null">
+        #{filetransId,jdbcType=BIGINT},
+      </if>
+      <if test="index != null">
+        #{index,jdbcType=INTEGER},
+      </if>
+      <if test="begin != null">
+        #{begin,jdbcType=INTEGER},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=INTEGER},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jiawa.nls.business.domain.FiletransSubtitleExample" resultType="java.lang.Long">
+    select count(*) from filetrans_subtitle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update filetrans_subtitle
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.filetransId != null">
+        filetrans_id = #{record.filetransId,jdbcType=BIGINT},
+      </if>
+      <if test="record.index != null">
+        `index` = #{record.index,jdbcType=INTEGER},
+      </if>
+      <if test="record.begin != null">
+        `begin` = #{record.begin,jdbcType=INTEGER},
+      </if>
+      <if test="record.end != null">
+        `end` = #{record.end,jdbcType=INTEGER},
+      </if>
+      <if test="record.text != null">
+        `text` = #{record.text,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update filetrans_subtitle
+    set id = #{record.id,jdbcType=BIGINT},
+      filetrans_id = #{record.filetransId,jdbcType=BIGINT},
+      `index` = #{record.index,jdbcType=INTEGER},
+      `begin` = #{record.begin,jdbcType=INTEGER},
+      `end` = #{record.end,jdbcType=INTEGER},
+      `text` = #{record.text,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawa.nls.business.domain.FiletransSubtitle">
+    update filetrans_subtitle
+    <set>
+      <if test="filetransId != null">
+        filetrans_id = #{filetransId,jdbcType=BIGINT},
+      </if>
+      <if test="index != null">
+        `index` = #{index,jdbcType=INTEGER},
+      </if>
+      <if test="begin != null">
+        `begin` = #{begin,jdbcType=INTEGER},
+      </if>
+      <if test="end != null">
+        `end` = #{end,jdbcType=INTEGER},
+      </if>
+      <if test="text != null">
+        `text` = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawa.nls.business.domain.FiletransSubtitle">
+    update filetrans_subtitle
+    set filetrans_id = #{filetransId,jdbcType=BIGINT},
+      `index` = #{index,jdbcType=INTEGER},
+      `begin` = #{begin,jdbcType=INTEGER},
+      `end` = #{end,jdbcType=INTEGER},
+      `text` = #{text,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

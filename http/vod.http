@@ -1,0 +1,16 @@
+POST http://localhost:18000/nls/web/vod/get-upload-auth
+Content-Type: application/json
+token: {{token}}
+
+{
+  "name": "test123.mp4",
+  "key": "123456789012345678"
+}
+
+###
+
+GET http://localhost:18000/nls/web/vod/cal-amount/20c6afd6c0c871eebfb04531858c0102
+Content-Type: application/json
+token: {{token}}
+
+###

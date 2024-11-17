@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiawa.nls.business.mapper.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jiawa.nls.business.domain.OrderInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_no" jdbcType="CHAR" property="orderNo" />
+    <result column="order_at" jdbcType="TIMESTAMP" property="orderAt" />
+    <result column="order_type" jdbcType="CHAR" property="orderType" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="pay_at" jdbcType="TIMESTAMP" property="payAt" />
+    <result column="channel" jdbcType="CHAR" property="channel" />
+    <result column="channel_at" jdbcType="TIMESTAMP" property="channelAt" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_no, order_at, order_type, info, member_id, amount, pay_at, channel, channel_at, 
+    `status`, `desc`, created_at, updated_at
+  </sql>
+  <select id="selectByExample" parameterType="com.jiawa.nls.business.domain.OrderInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jiawa.nls.business.domain.OrderInfoExample">
+    delete from order_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jiawa.nls.business.domain.OrderInfo">
+    insert into order_info (id, order_no, order_at, 
+      order_type, info, member_id, 
+      amount, pay_at, channel, 
+      channel_at, `status`, `desc`, 
+      created_at, updated_at)
+    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=CHAR}, #{orderAt,jdbcType=TIMESTAMP}, 
+      #{orderType,jdbcType=CHAR}, #{info,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, 
+      #{amount,jdbcType=DECIMAL}, #{payAt,jdbcType=TIMESTAMP}, #{channel,jdbcType=CHAR}, 
+      #{channelAt,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawa.nls.business.domain.OrderInfo">
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="orderAt != null">
+        order_at,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="payAt != null">
+        pay_at,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="channelAt != null">
+        channel_at,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="desc != null">
+        `desc`,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=CHAR},
+      </if>
+      <if test="orderAt != null">
+        #{orderAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=CHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="payAt != null">
+        #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=CHAR},
+      </if>
+      <if test="channelAt != null">
+        #{channelAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jiawa.nls.business.domain.OrderInfoExample" resultType="java.lang.Long">
+    select count(*) from order_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update order_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=CHAR},
+      </if>
+      <if test="record.orderAt != null">
+        order_at = #{record.orderAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderType != null">
+        order_type = #{record.orderType,jdbcType=CHAR},
+      </if>
+      <if test="record.info != null">
+        info = #{record.info,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=BIGINT},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payAt != null">
+        pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.channel != null">
+        channel = #{record.channel,jdbcType=CHAR},
+      </if>
+      <if test="record.channelAt != null">
+        channel_at = #{record.channelAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.desc != null">
+        `desc` = #{record.desc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update order_info
+    set id = #{record.id,jdbcType=BIGINT},
+      order_no = #{record.orderNo,jdbcType=CHAR},
+      order_at = #{record.orderAt,jdbcType=TIMESTAMP},
+      order_type = #{record.orderType,jdbcType=CHAR},
+      info = #{record.info,jdbcType=VARCHAR},
+      member_id = #{record.memberId,jdbcType=BIGINT},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      channel = #{record.channel,jdbcType=CHAR},
+      channel_at = #{record.channelAt,jdbcType=TIMESTAMP},
+      `status` = #{record.status,jdbcType=CHAR},
+      `desc` = #{record.desc,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawa.nls.business.domain.OrderInfo">
+    update order_info
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=CHAR},
+      </if>
+      <if test="orderAt != null">
+        order_at = #{orderAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=CHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="payAt != null">
+        pay_at = #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=CHAR},
+      </if>
+      <if test="channelAt != null">
+        channel_at = #{channelAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="desc != null">
+        `desc` = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawa.nls.business.domain.OrderInfo">
+    update order_info
+    set order_no = #{orderNo,jdbcType=CHAR},
+      order_at = #{orderAt,jdbcType=TIMESTAMP},
+      order_type = #{orderType,jdbcType=CHAR},
+      info = #{info,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      pay_at = #{payAt,jdbcType=TIMESTAMP},
+      channel = #{channel,jdbcType=CHAR},
+      channel_at = #{channelAt,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=CHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,18 @@
+GET http://localhost:18000/nls/web/filetrans-subtitle/query?page=2&size=5&filetransId=1767004562854092800
+Accept: application/json
+token: {{token}}
+
+###
+
+GET http://localhost:18000/nls/web/filetrans-subtitle/gen-subtitle?filetransId=1767004562854092800
+Accept: application/json
+token: {{token}}
+
+###
+
+GET http://localhost:18000/nls/web/filetrans-subtitle/gen-text?filetransId=1767004562854092800
+Accept: application/json
+token: {{token}}
+
+###
+

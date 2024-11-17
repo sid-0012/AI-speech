@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiawa.nls.business.mapper.FiletransMapper">
+  <resultMap id="BaseResultMap" type="com.jiawa.nls.business.domain.Filetrans">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="second" jdbcType="INTEGER" property="second" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="audio" jdbcType="VARCHAR" property="audio" />
+    <result column="file_sign" jdbcType="CHAR" property="fileSign" />
+    <result column="pay_status" jdbcType="CHAR" property="payStatus" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="lang" jdbcType="CHAR" property="lang" />
+    <result column="vod" jdbcType="CHAR" property="vod" />
+    <result column="task_id" jdbcType="CHAR" property="taskId" />
+    <result column="trans_status_code" jdbcType="INTEGER" property="transStatusCode" />
+    <result column="trans_status_text" jdbcType="VARCHAR" property="transStatusText" />
+    <result column="trans_time" jdbcType="TIMESTAMP" property="transTime" />
+    <result column="solve_time" jdbcType="TIMESTAMP" property="solveTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, member_id, `name`, `second`, amount, audio, file_sign, pay_status, `status`, 
+    lang, vod, task_id, trans_status_code, trans_status_text, trans_time, solve_time, 
+    created_at, updated_at
+  </sql>
+  <select id="selectByExample" parameterType="com.jiawa.nls.business.domain.FiletransExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from filetrans
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filetrans
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from filetrans
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jiawa.nls.business.domain.FiletransExample">
+    delete from filetrans
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jiawa.nls.business.domain.Filetrans">
+    insert into filetrans (id, member_id, `name`, 
+      `second`, amount, audio, 
+      file_sign, pay_status, `status`, 
+      lang, vod, task_id, trans_status_code, 
+      trans_status_text, trans_time, solve_time, 
+      created_at, updated_at)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{second,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{audio,jdbcType=VARCHAR}, 
+      #{fileSign,jdbcType=CHAR}, #{payStatus,jdbcType=CHAR}, #{status,jdbcType=CHAR}, 
+      #{lang,jdbcType=CHAR}, #{vod,jdbcType=CHAR}, #{taskId,jdbcType=CHAR}, #{transStatusCode,jdbcType=INTEGER}, 
+      #{transStatusText,jdbcType=VARCHAR}, #{transTime,jdbcType=TIMESTAMP}, #{solveTime,jdbcType=TIMESTAMP}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawa.nls.business.domain.Filetrans">
+    insert into filetrans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="second != null">
+        `second`,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="audio != null">
+        audio,
+      </if>
+      <if test="fileSign != null">
+        file_sign,
+      </if>
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="lang != null">
+        lang,
+      </if>
+      <if test="vod != null">
+        vod,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="transStatusCode != null">
+        trans_status_code,
+      </if>
+      <if test="transStatusText != null">
+        trans_status_text,
+      </if>
+      <if test="transTime != null">
+        trans_time,
+      </if>
+      <if test="solveTime != null">
+        solve_time,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="second != null">
+        #{second,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="audio != null">
+        #{audio,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSign != null">
+        #{fileSign,jdbcType=CHAR},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="lang != null">
+        #{lang,jdbcType=CHAR},
+      </if>
+      <if test="vod != null">
+        #{vod,jdbcType=CHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=CHAR},
+      </if>
+      <if test="transStatusCode != null">
+        #{transStatusCode,jdbcType=INTEGER},
+      </if>
+      <if test="transStatusText != null">
+        #{transStatusText,jdbcType=VARCHAR},
+      </if>
+      <if test="transTime != null">
+        #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="solveTime != null">
+        #{solveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jiawa.nls.business.domain.FiletransExample" resultType="java.lang.Long">
+    select count(*) from filetrans
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update filetrans
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.second != null">
+        `second` = #{record.second,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.audio != null">
+        audio = #{record.audio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileSign != null">
+        file_sign = #{record.fileSign,jdbcType=CHAR},
+      </if>
+      <if test="record.payStatus != null">
+        pay_status = #{record.payStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.lang != null">
+        lang = #{record.lang,jdbcType=CHAR},
+      </if>
+      <if test="record.vod != null">
+        vod = #{record.vod,jdbcType=CHAR},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=CHAR},
+      </if>
+      <if test="record.transStatusCode != null">
+        trans_status_code = #{record.transStatusCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.transStatusText != null">
+        trans_status_text = #{record.transStatusText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transTime != null">
+        trans_time = #{record.transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.solveTime != null">
+        solve_time = #{record.solveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update filetrans
+    set id = #{record.id,jdbcType=BIGINT},
+      member_id = #{record.memberId,jdbcType=BIGINT},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      `second` = #{record.second,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      audio = #{record.audio,jdbcType=VARCHAR},
+      file_sign = #{record.fileSign,jdbcType=CHAR},
+      pay_status = #{record.payStatus,jdbcType=CHAR},
+      `status` = #{record.status,jdbcType=CHAR},
+      lang = #{record.lang,jdbcType=CHAR},
+      vod = #{record.vod,jdbcType=CHAR},
+      task_id = #{record.taskId,jdbcType=CHAR},
+      trans_status_code = #{record.transStatusCode,jdbcType=INTEGER},
+      trans_status_text = #{record.transStatusText,jdbcType=VARCHAR},
+      trans_time = #{record.transTime,jdbcType=TIMESTAMP},
+      solve_time = #{record.solveTime,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawa.nls.business.domain.Filetrans">
+    update filetrans
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="second != null">
+        `second` = #{second,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="audio != null">
+        audio = #{audio,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSign != null">
+        file_sign = #{fileSign,jdbcType=CHAR},
+      </if>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="lang != null">
+        lang = #{lang,jdbcType=CHAR},
+      </if>
+      <if test="vod != null">
+        vod = #{vod,jdbcType=CHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=CHAR},
+      </if>
+      <if test="transStatusCode != null">
+        trans_status_code = #{transStatusCode,jdbcType=INTEGER},
+      </if>
+      <if test="transStatusText != null">
+        trans_status_text = #{transStatusText,jdbcType=VARCHAR},
+      </if>
+      <if test="transTime != null">
+        trans_time = #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="solveTime != null">
+        solve_time = #{solveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawa.nls.business.domain.Filetrans">
+    update filetrans
+    set member_id = #{memberId,jdbcType=BIGINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      `second` = #{second,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      audio = #{audio,jdbcType=VARCHAR},
+      file_sign = #{fileSign,jdbcType=CHAR},
+      pay_status = #{payStatus,jdbcType=CHAR},
+      `status` = #{status,jdbcType=CHAR},
+      lang = #{lang,jdbcType=CHAR},
+      vod = #{vod,jdbcType=CHAR},
+      task_id = #{taskId,jdbcType=CHAR},
+      trans_status_code = #{transStatusCode,jdbcType=INTEGER},
+      trans_status_text = #{transStatusText,jdbcType=VARCHAR},
+      trans_time = #{transTime,jdbcType=TIMESTAMP},
+      solve_time = #{solveTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
